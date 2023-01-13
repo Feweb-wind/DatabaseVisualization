@@ -99,6 +99,7 @@ def create_app(test_config=None):
         }
         lock.release()
         return res
+    # 获得岗位数量
 
     @app.route('/api/getJobNum')
     def getJobNum():
@@ -111,4 +112,15 @@ def create_app(test_config=None):
         return res
 
     #     return res
+    # 获得地理测试
+    @app.route('/api/getComAddress')
+    def getTest():
+        lock.acquire()
+        con.ping(reconnect=True)
+        allAddress = db.getComAddress(con.cursor())
+        res = {
+            "data": analysis.analysisAccessProportion(allAddress)
+        }
+        lock.release()
+        return res
     return app

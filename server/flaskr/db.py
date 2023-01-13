@@ -54,6 +54,12 @@ def getDegree(cursor):
 def getJob(cursor):
     res = getAllMessageOfTable(cursor, "jobinformation", "jobName")
     return res
+# 获得公司位置
+
+
+def getComAddress(cursor):
+    res = getAllMessageOfTable(cursor, "companyinformation", "companyAddress")
+    return res
 # 编写sql语句查询，适用于复杂情况
 
 

@@ -21,11 +21,8 @@ def sortDict(mydict):
 # 分析岗位分布
 
 
-def analysisJobProportion(arr):
+def analysisP(arr, query):
     result = {}
-    query = ['前端', 'Java', 'C++', 'PHP', 'C', 'C#', '.NET', 'Hadoop', 'Python', 'VB', 'Ruby', 'Node.js', 'Golang'
-             '图像', '全栈工程师', '后端开发', 'Android', 'ios', 'JavaScript', 'U3D', 'UE4', '测试工程师', '运维工程师',
-             '系统管理员', '网络安全', 'DBA']
     i = 0
     for item in query:
         query[i] = item.upper()
@@ -45,3 +42,17 @@ def analysisJobProportion(arr):
         temp.append((key, val))
         temp = sorted(temp, key=lambda x: x[1], reverse=True)
     return temp
+
+
+def analysisJobProportion(arr):
+    query = ['前端', 'Java', 'C++', 'PHP', 'C', 'C#', '.NET', 'Hadoop', 'Python', 'VB', 'Ruby', 'Node.js', 'Golang'
+             '图像', '全栈工程师', '后端开发', 'Android', 'ios', 'JavaScript', 'U3D', 'UE4', '测试工程师', '运维工程师',
+             '系统管理员', '网络安全', 'DBA']
+    return analysisP(arr, query)
+# 分析地理分布
+
+
+def analysisAccessProportion(arr):
+    query = ["江岸区", "江汉区", "硚口区", "汉阳区", "武昌区", "青山区",
+             "洪山区", "蔡甸区", "江夏区", "黄陂区", "新洲区", "东西湖区", "汉南区"]
+    return analysisP(arr, query)
