@@ -61,6 +61,31 @@ def create_app(test_config=None):
             "data": db.getDegree(con.cursor())
         }
         lock.release()
+        print(res["data"])
+        return analysis.analysisProportion(res["data"])
+
+    # 获得融资情况
+    @app.route('/api/getFinancing')
+    def getFinancing():
+        lock.acquire()
+        con.ping(reconnect=True)
+        res = {
+            "data": db.getFinancing(con.cursor())
+        }
+        lock.release()
+        print(res["data"])
+        return analysis.analysisProportion(res["data"])
+    # 获得公司类别
+
+    @app.route('/api/getField')
+    def getField():
+        lock.acquire()
+        con.ping(reconnect=True)
+        res = {
+            "data": db.getField(con.cursor())
+        }
+        lock.release()
+        print(res["data"])
         return analysis.analysisProportion(res["data"])
     # 获得公司岗位数量
 

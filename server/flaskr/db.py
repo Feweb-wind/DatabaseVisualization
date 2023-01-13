@@ -49,6 +49,31 @@ def getDegree(cursor):
     for item in res:
         result.append(item[0])
     return result
+
+# 获得融资情况
+
+
+def getFinancing(cursor):
+    res = getAllMessageOfTable(
+        cursor, "companyinformation", "companyFinancing")
+    result = []
+    # 数组降维
+    for item in res:
+        if (len(item[0]) > 1):
+            result.append(item[0])
+    return result
+
+# 获得公司类别
+
+
+def getField(cursor):
+    res = getAllMessageOfTable(
+        cursor, "companyinformation", "companyField")
+    result = []
+    # 数组降维
+    for item in res:
+        result.append(item[0])
+    return result
 # 单独获得工作
 
 
