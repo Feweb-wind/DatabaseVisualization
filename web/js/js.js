@@ -378,7 +378,7 @@ $(function () {
 
                 },
 
-                data: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24']
+                data: ['01', '02', '03', '04', '05']
 
             }, {
 
@@ -446,7 +446,7 @@ $(function () {
                             borderWidth: 12
                         }
                     },
-                    data: [3, 4, 3, 4, 3, 4, 3, 6, 2, 4, 2, 4, 3, 4, 3, 4, 3, 4, 3, 6, 2, 4, 2, 4]
+                    data: [3, 4, 3, 4, 3]
 
                 },
                 {
@@ -482,7 +482,7 @@ $(function () {
                             borderWidth: 12
                         }
                     },
-                    data: [5, 3, 5, 6, 1, 5, 3, 5, 6, 4, 6, 4, 8, 3, 5, 6, 1, 5, 3, 7, 2, 5, 1, 4]
+                    data: [5, 3, 5, 6, 1]
 
                 },
 
@@ -499,145 +499,91 @@ $(function () {
     function echarts_6() {
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('echart6'));
+        function getOptionItem(name, value, index) {
+            let rArr = [['59%', '70%'], ['49%', '60%'], ['39%', '50%'], ['29%', '40%'], ['20%', '30%']]
+            var dataStyle = {
 
-        var dataStyle = {
-            normal: {
-                label: {
-                    show: false
-                },
-                labelLine: {
-                    show: false
-                },
-                //shadowBlur: 40,
-                //shadowColor: 'rgba(40, 40, 40, 1)',
-            }
-        };
-        var placeHolderStyle = {
-            normal: {
-                color: 'rgba(255,255,255,.05)',
-                label: { show: false, },
-                labelLine: { show: false }
-            },
-            emphasis: {
-                color: 'rgba(0,0,0,0)'
-            }
-        };
-        option = {
-            color: ['#0f63d6', '#0f78d6', '#0f8cd6', '#0fa0d6', '#0fb4d6'],
-            tooltip: {
-                show: true,
-                formatter: "{a} : {c} "
-            },
-            legend: {
-                itemWidth: 10,
-                itemHeight: 10,
-                itemGap: 12,
-                bottom: '3%',
-
-                data: ['浙江', '上海', '广东', '北京', '深圳'],
-                textStyle: {
-                    color: 'rgba(255,255,255,.6)',
+                normal: {
+                    label: {
+                        show: false
+                    },
+                    labelLine: {
+                        show: false
+                    }
                 }
-            },
+            };
+            var placeHolderStyle = {
+                normal: {
+                    color: 'rgba(255,255,255,.05)',
+                    label: { show: false, },
+                    labelLine: { show: false }
+                },
+                emphasis: {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            let item = {
+                name: name,
+                type: 'pie',
+                clockWise: false,
+                center: ['50%', '42%'],
+                radius: rArr[index],
+                itemStyle: dataStyle,
+                hoverAnimation: false,
+                data: [{
+                    value: value + 20,
+                    name: '0' + index
+                }, {
+                    value: 100 - value,
+                    name: 'invisible',
+                    tooltip: { show: false },
+                    itemStyle: placeHolderStyle
+                }]
+            }
+            return item
+        }
+        $.ajax({
+            type: 'get',
+            url: BaseUrl + '/getComAddress',
+            success: function (data) {
+                let xData = []
+                let yData = []
+                let allValue = 0
+                let showNum = 5
 
-            series: [
-                {
-                    name: '浙江',
-                    type: 'pie',
-                    clockWise: false,
-                    center: ['50%', '42%'],
-                    radius: ['59%', '70%'],
-                    itemStyle: dataStyle,
-                    hoverAnimation: false,
-                    data: [{
-                        value: 80,
-                        name: '01'
-                    }, {
-                        value: 20,
-                        name: 'invisible',
-                        tooltip: { show: false },
-                        itemStyle: placeHolderStyle
-                    }]
-                },
-                {
-                    name: '上海',
-                    type: 'pie',
-                    clockWise: false,
-                    center: ['50%', '42%'],
-                    radius: ['49%', '60%'],
-                    itemStyle: dataStyle,
-                    hoverAnimation: false,
-                    data: [{
-                        value: 70,
-                        name: '02'
-                    }, {
-                        value: 30,
-                        name: 'invisible',
-                        tooltip: { show: false },
-                        itemStyle: placeHolderStyle
-                    }]
-                },
-                {
-                    name: '广东',
-                    type: 'pie',
-                    clockWise: false,
-                    hoverAnimation: false,
-                    center: ['50%', '42%'],
-                    radius: ['39%', '50%'],
-                    itemStyle: dataStyle,
-                    data: [{
-                        value: 65,
-                        name: '03'
-                    }, {
-                        value: 35,
-                        name: 'invisible',
-                        tooltip: { show: false },
-                        itemStyle: placeHolderStyle
-                    }]
-                },
-                {
-                    name: '北京',
-                    type: 'pie',
-                    clockWise: false,
-                    hoverAnimation: false,
-                    center: ['50%', '42%'],
-                    radius: ['29%', '40%'],
-                    itemStyle: dataStyle,
-                    data: [{
-                        value: 60,
-                        name: '04'
-                    }, {
-                        value: 40,
-                        name: 'invisible',
-                        tooltip: { show: false },
-                        itemStyle: placeHolderStyle
-                    }]
-                },
-                {
-                    name: '深圳',
-                    type: 'pie',
-                    clockWise: false,
-                    hoverAnimation: false,
-                    center: ['50%', '42%'],
-                    radius: ['20%', '30%'],
-                    itemStyle: dataStyle,
-                    data: [{
-                        value: 50,
-                        name: '05'
-                    }, {
-                        value: 50,
-                        name: 'invisible',
-                        tooltip: { show: false },
-                        itemStyle: placeHolderStyle
-                    }]
-                },]
-        };
+                for (let i = 0; i < showNum; i++) {
+                    xData.push(data.data[i][0])
+                    yData.push(data.data[i][1])
+                    allValue += data.data[i][1]
+                }
+                option = {
+                    color: ['#0f63d6', '#0f78d6', '#0f8cd6', '#0fa0d6', '#0fb4d6'],
+                    tooltip: {
+                        show: true,
+                        formatter: "{a} : {c} "
+                    },
+                    legend: {
+                        itemWidth: 10,
+                        itemHeight: 10,
+                        itemGap: 12,
+                        bottom: '3%',
+                        data: xData,
+                        textStyle: {
+                            color: 'rgba(255,255,255,.6)',
+                        }
+                    },
+                    series: []
+                };
+                for (let i = 0; i < showNum; i++) {
+                    option["series"].push(getOptionItem(xData[i], Math.floor((yData[i] / allValue) * 100), i))
+                }
+                myChart.setOption(option);
+                window.addEventListener("resize", function () {
+                    myChart.resize();
+                });
+            }
 
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-        window.addEventListener("resize", function () {
-            myChart.resize();
-        });
+        })
     }
     function echarts_31() {
         // 基于准备好的dom，初始化echarts实例

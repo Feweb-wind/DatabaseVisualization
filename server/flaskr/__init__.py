@@ -114,12 +114,22 @@ def create_app(test_config=None):
     #     return res
     # 获得地理测试
     @app.route('/api/getComAddress')
-    def getTest():
+    def getComAddress():
         lock.acquire()
         con.ping(reconnect=True)
         allAddress = db.getComAddress(con.cursor())
         res = {
             "data": analysis.analysisAccessProportion(allAddress)
+        }
+        lock.release()
+        return res
+
+    @app.route('/api/getTest')
+    def getTest():
+        lock.acquire()
+        con.ping(reconnect=True)
+        res = {
+            "data": db.getTimeAndEdu(con.cursor())
         }
         lock.release()
         return res

@@ -60,6 +60,13 @@ def getJob(cursor):
 def getComAddress(cursor):
     res = getAllMessageOfTable(cursor, "companyinformation", "companyAddress")
     return res
+
+
+def getTimeAndEdu(cursor):
+    res = getAllMessageOfTable(
+        cursor, "jobinformation", "jobworkTime,jobEduaction")
+    return res
+#
 # 编写sql语句查询，适用于复杂情况
 
 
