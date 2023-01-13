@@ -9,6 +9,7 @@ def getCursor(host, user, password, database):
 
 def getAllMessageOfTable(cursor, tableName, column='*'):
     sql = "select " + column.lower() + " from " + tableName + ';'
+    print(sql)
     cursor.execute(sql)
     res = cursor.fetchall()
     return res
@@ -64,7 +65,7 @@ def getComAddress(cursor):
 
 def getTimeAndEdu(cursor):
     res = getAllMessageOfTable(
-        cursor, "jobinformation", "jobworkTime,jobEduaction")
+        cursor, "jobinformation", "jobworkTime,jobEducation,joblowSalary,jobhighSalary")
     return res
 #
 # 编写sql语句查询，适用于复杂情况

@@ -336,165 +336,179 @@ $(function () {
     function echarts_4() {
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('echart4'));
-
-        option = {
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    lineStyle: {
-                        color: '#dddc6b'
-                    }
-                }
-            },
-            legend: {
-                top: '0%',
-                data: ['安卓', 'IOS'],
-                textStyle: {
-                    color: 'rgba(255,255,255,.5)',
-                    fontSize: '12',
-                }
-            },
-            grid: {
-                left: '10',
-                top: '30',
-                right: '10',
-                bottom: '10',
-                containLabel: true
-            },
-
-            xAxis: [{
-                type: 'category',
-                boundaryGap: false,
-                axisLabel: {
-                    textStyle: {
-                        color: "rgba(255,255,255,.6)",
-                        fontSize: 12,
-                    },
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: 'rgba(255,255,255,.2)'
-                    }
-
-                },
-
-                data: ['01', '02', '03', '04', '05']
-
-            }, {
-
-                axisPointer: { show: false },
-                axisLine: { show: false },
-                position: 'bottom',
-                offset: 20,
-
-
-
-            }],
-
-            yAxis: [{
-                type: 'value',
-                axisTick: { show: false },
-                axisLine: {
-                    lineStyle: {
-                        color: 'rgba(255,255,255,.1)'
-                    }
-                },
-                axisLabel: {
-                    textStyle: {
-                        color: "rgba(255,255,255,.6)",
-                        fontSize: 12,
-                    },
-                },
-
-                splitLine: {
-                    lineStyle: {
-                        color: 'rgba(255,255,255,.1)'
-                    }
-                }
-            }],
-            series: [
-                {
-                    name: '安卓',
-                    type: 'line',
-                    smooth: true,
-                    symbol: 'circle',
-                    symbolSize: 5,
-                    showSymbol: false,
-                    lineStyle: {
-
-                        normal: {
-                            color: '#0184d5',
-                            width: 2
+        $.ajax({
+            type: 'get',
+            url: BaseUrl + '/getSalary',
+            success: function (data) {
+                let yData1 = Object.values(data.data[0]).sort((a, b) => {
+                    return a - b
+                })
+                let yData2 = Object.values(data.data[1]).sort((a, b) => {
+                    return a - b
+                })
+                console.log(yData1, yData2)
+                option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            lineStyle: {
+                                color: '#dddc6b'
+                            }
                         }
                     },
-                    areaStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: 'rgba(1, 132, 213, 0.4)'
-                            }, {
-                                offset: 0.8,
-                                color: 'rgba(1, 132, 213, 0.1)'
-                            }], false),
-                            shadowColor: 'rgba(0, 0, 0, 0.1)',
+                    legend: {
+                        top: '0%',
+                        data: ['本科', '硕士'],
+                        textStyle: {
+                            color: 'rgba(255,255,255,.5)',
+                            fontSize: '12',
                         }
                     },
-                    itemStyle: {
-                        normal: {
-                            color: '#0184d5',
-                            borderColor: 'rgba(221, 220, 107, .1)',
-                            borderWidth: 12
-                        }
+                    grid: {
+                        left: '10',
+                        top: '30',
+                        right: '10',
+                        bottom: '10',
+                        containLabel: true
                     },
-                    data: [3, 4, 3, 4, 3]
 
-                },
-                {
-                    name: 'IOS',
-                    type: 'line',
-                    smooth: true,
-                    symbol: 'circle',
-                    symbolSize: 5,
-                    showSymbol: false,
-                    lineStyle: {
+                    xAxis: [{
+                        type: 'category',
+                        boundaryGap: false,
+                        axisLabel: {
+                            textStyle: {
+                                color: "rgba(255,255,255,.6)",
+                                fontSize: 12,
+                            },
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: 'rgba(255,255,255,.2)'
+                            }
 
-                        normal: {
-                            color: '#00d887',
-                            width: 2
+                        },
+
+                        data: ['应届', '1年', '2年', '3年', '4年', '5年', '10年']
+
+                    }, {
+
+                        axisPointer: { show: false },
+                        axisLine: { show: false },
+                        position: 'bottom',
+                        offset: 20,
+
+
+
+                    }],
+
+                    yAxis: [{
+                        type: 'value',
+                        axisTick: { show: false },
+                        axisLine: {
+                            lineStyle: {
+                                color: 'rgba(255,255,255,.1)'
+                            }
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: "rgba(255,255,255,.6)",
+                                fontSize: 12,
+                            },
+                        },
+
+                        splitLine: {
+                            lineStyle: {
+                                color: 'rgba(255,255,255,.1)'
+                            }
                         }
-                    },
-                    areaStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: 'rgba(0, 216, 135, 0.4)'
-                            }, {
-                                offset: 0.8,
-                                color: 'rgba(0, 216, 135, 0.1)'
-                            }], false),
-                            shadowColor: 'rgba(0, 0, 0, 0.1)',
-                        }
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: '#00d887',
-                            borderColor: 'rgba(221, 220, 107, .1)',
-                            borderWidth: 12
-                        }
-                    },
-                    data: [5, 3, 5, 6, 1]
+                    }],
+                    series: [
+                        {
+                            name: '本科',
+                            type: 'line',
+                            smooth: true,
+                            symbol: 'circle',
+                            symbolSize: 5,
+                            showSymbol: false,
+                            lineStyle: {
 
-                },
+                                normal: {
+                                    color: '#0184d5',
+                                    width: 2
+                                }
+                            },
+                            areaStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: 'rgba(1, 132, 213, 0.4)'
+                                    }, {
+                                        offset: 0.8,
+                                        color: 'rgba(1, 132, 213, 0.1)'
+                                    }], false),
+                                    shadowColor: 'rgba(0, 0, 0, 0.1)',
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#0184d5',
+                                    borderColor: 'rgba(221, 220, 107, .1)',
+                                    borderWidth: 12
+                                }
+                            },
+                            data: yData1
 
-            ]
+                        },
+                        {
+                            name: '硕士',
+                            type: 'line',
+                            smooth: true,
+                            symbol: 'circle',
+                            symbolSize: 5,
+                            showSymbol: false,
+                            lineStyle: {
 
-        };
+                                normal: {
+                                    color: '#00d887',
+                                    width: 2
+                                }
+                            },
+                            areaStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: 'rgba(0, 216, 135, 0.4)'
+                                    }, {
+                                        offset: 0.8,
+                                        color: 'rgba(0, 216, 135, 0.1)'
+                                    }], false),
+                                    shadowColor: 'rgba(0, 0, 0, 0.1)',
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#00d887',
+                                    borderColor: 'rgba(221, 220, 107, .1)',
+                                    borderWidth: 12
+                                }
+                            },
+                            data: yData2
 
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-        window.addEventListener("resize", function () {
-            myChart.resize();
-        });
+                        },
+
+                    ]
+
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+                window.addEventListener("resize", function () {
+                    myChart.resize();
+                });
+            }
+
+        })
+
+
     }
     function echarts_6() {
         // 基于准备好的dom，初始化echarts实例

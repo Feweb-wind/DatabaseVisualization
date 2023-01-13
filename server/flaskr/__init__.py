@@ -124,12 +124,13 @@ def create_app(test_config=None):
         lock.release()
         return res
 
-    @app.route('/api/getTest')
+    @app.route('/api/getSalary')
     def getTest():
         lock.acquire()
         con.ping(reconnect=True)
+        temp = db.getTimeAndEdu(con.cursor())
         res = {
-            "data": db.getTimeAndEdu(con.cursor())
+            "data": analysis.analysisSalary(temp)
         }
         lock.release()
         return res

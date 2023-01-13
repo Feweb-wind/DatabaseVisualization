@@ -56,3 +56,52 @@ def analysisAccessProportion(arr):
     query = ["江岸区", "江汉区", "硚口区", "汉阳区", "武昌区", "青山区",
              "洪山区", "蔡甸区", "江夏区", "黄陂区", "新洲区", "东西湖区", "汉南区"]
     return analysisP(arr, query)
+
+# 分析本科与研究生薪资增长情况
+
+
+def analysisSalary(arr):
+    # 本科
+    result1 = {
+        '在校/应届': 0,
+        '1': 0,
+        '2': 0,
+        '3': 0,
+        '4': 0,
+        '5': 0,
+        '10': 0
+
+    }
+    # 硕士
+    result2 = {
+        '在校/应届': 0,
+        '1': 0,
+        '2': 0,
+        '3': 0,
+        '4': 0,
+        '5': 0,
+        '10': 0
+
+    }
+    for item in arr:
+        low = 0
+        heigh = 0
+        result = {}
+        if (item[1] == '本科'):
+            result = result1
+        elif (item[1] == '硕士'):
+            result = result2
+        else:
+            continue
+        if (item[0] == '在校/应届'):
+            result[item[0]] = (item[2]+item[3])//2
+        elif (item[0] == '1-3年'):
+            result['1'] = (result['1']+item[2])//2
+            result['2'] = (result['2']+item[3])//2
+        elif (item[0] == '3-5年'):
+            result['3'] = (result['3']+item[2])//2
+            result['4'] = (result['4']+item[3])//2
+        elif (item[0] == '5-10年'):
+            result['5'] = (result['5']+item[2])//2
+            result['10'] = (result['10']+item[3])//2
+    return [result1, result2]
