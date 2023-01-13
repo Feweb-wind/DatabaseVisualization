@@ -72,6 +72,7 @@ def create_app(test_config=None):
             "data": db.getCompanyJobNum(con.cursor())
         }
         res["data"] = sorted(res["data"], key=lambda x: x[1], reverse=True)
+        res["data"] = res["data"][:10]
         lock.release()
         return res
     # 获得岗位分布
@@ -80,8 +81,10 @@ def create_app(test_config=None):
     def analysisJob():
         lock.acquire()
         con.ping(reconnect=True)
+        allJob = db.getJob(con.cursor())
+        analJob = analysis.analysisJobProportion(allJob)
         res = {
-            "data": db.getJob(con.cursor())
+            "data": analJob
         }
         lock.release()
         return res

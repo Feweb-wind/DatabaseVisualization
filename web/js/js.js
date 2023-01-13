@@ -17,6 +17,7 @@ $(function () {
             type: "get",
             url: 'http://127.0.0.1:5000/api/getComJobNum',
             success: function (data) {
+                console.log('echart1', data)
                 let labeldata = []
                 let seriesdata = []
                 for (let i = 0; i < 7; i++) {
